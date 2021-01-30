@@ -1,0 +1,16 @@
+.container-imagenes{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container-image{
+    height: 240px; 
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.image-orientancion{
+    max-width: 100%;
+    max-height: 100%;
+}
