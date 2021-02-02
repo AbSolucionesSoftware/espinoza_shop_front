@@ -32,6 +32,7 @@ export default function RegistroPublicidad(props) {
 
 	const [ categoriasBD, setCategoriasBD ] = useState([]);
 	const [ temporadasBD, setTemporadasBD ] = useState([]);
+	const [ generosBD, setGenerosBD ] = useState([]);
 	const [ bannerRender, setBannerRender ] = useState({ banner: '', banners: '' });
 	const [ bannerSeleccionado, setBannerSeleccionado ] = useState({ banner: '', banners: '' });
 	const [ datos, setDatos ] = useState({
@@ -44,6 +45,8 @@ export default function RegistroPublicidad(props) {
 	});
 	const [ disabledCheck, setDisabledCheck ] = useState(true);
 	const [ disabledReg3, setDisabledReg3 ] = useState(0);
+
+	const [ saveAndPublish, setSaveAndPublish ] = useState(false);
 
 	/* UPLOAD ANTD */
 	const [ openPreview, setOpenPreview ] = useState(false);
@@ -161,6 +164,22 @@ export default function RegistroPublicidad(props) {
 				errors(err);
 			});
 	}
+	async function obtenerGeneros() {
+		await clienteAxios
+			.get(`/productos/agrupar/generos`)
+			.then((res) => {
+				let generos = [];
+				res.data.forEach((genero) => {
+					if(genero._id !== 'Ninguno'){
+						generos.push({ label: genero._id, value: genero._id });
+					}
+				});
+				setGenerosBD(generos);
+			})
+			.catch((err) => {
+				errors(err);
+			});
+	}
 
 	const enviarDatos = async () => {
 		if (!datos.tipo) {
@@ -221,6 +240,11 @@ export default function RegistroPublicidad(props) {
 							if (bannerSeleccionado.banner.estilo < 3) {
 								props.history.push('/admin/publicidad');
 							}
+							if(saveAndPublish){
+								publicarBanner(true);
+							}else{
+								publicarBanner(false);
+							}
 						})
 						.catch((err) => {
 							setLoading(false);
@@ -245,6 +269,11 @@ export default function RegistroPublicidad(props) {
 							if (bannerSeleccionado.banner.estilo < 3) {
 								props.history.push('/admin/publicidad');
 							}
+							if(saveAndPublish){
+								publicarBanner();
+							}else{
+								publicarBanner(false);
+							}
 						})
 						.catch((err) => {
 							setLoading(false);
@@ -264,7 +293,7 @@ export default function RegistroPublicidad(props) {
 					imagenBanner: banners.imagenBanner ? banners.imagenBanner : '',
 					tipo: banners.tipo.categoria
 						? [ 'categoria', banners.tipo.categoria ]
-						: [ 'temporada', banners.tipo.temporada ],
+						: banners.tipo.temporada ? [ 'temporada', banners.tipo.temporada ] : [ 'genero', banners.tipo.genero ],
 					vincular: banners.vincular,
 					mostrarProductos: banners.mostrarProductos,
 					mostrarTitulo: banners.mostrarTitulo,
@@ -294,9 +323,13 @@ export default function RegistroPublicidad(props) {
 						form.setFieldsValue({
 							tipo: [ 'categoria', banners.tipo.categoria ]
 						});
-					} else {
+					} else if (banners.tipo.temporada) {
 						form.setFieldsValue({
 							tipo: [ 'temporada', banners.tipo.temporada ]
+						});
+					}else {
+						form.setFieldsValue({
+							tipo: [ 'genero', banners.tipo.genero ]
 						});
 					}
 				}
@@ -385,6 +418,7 @@ export default function RegistroPublicidad(props) {
 		() => {
 			obtenerCategorias();
 			obtenerTemporadas();
+			obtenerGeneros();
 			obtenerBannerBD();
 		},
 		[ reload ]
@@ -402,6 +436,12 @@ export default function RegistroPublicidad(props) {
 			label: 'Temporada',
 			name: 'temporada',
 			children: temporadasBD
+		},
+		{
+			value: 'genero',
+			label: 'Género',
+			name: 'genero',
+			children: generosBD
 		}
 	];
 
@@ -694,7 +734,7 @@ export default function RegistroPublicidad(props) {
 												info
 												message={
 													<p>
-														Tamaño recomendado para esta imagen es: <b>alto=280px</b>,{' '}
+														Tamaño recomendado para esta imagen es: <b>alto=240px</b>,{' '}
 														<b>largo=400px</b>
 													</p>
 												}
@@ -704,8 +744,8 @@ export default function RegistroPublicidad(props) {
 												info
 												message={
 													<p>
-														Tamaño recomendado para esta imagen es: <b>alto=560px</b>,{' '}
-														<b>largo=560px</b>
+														Tamaño recomendado para esta imagen es: <b>alto=700px</b>,{' '}
+														<b>largo=470px</b>
 													</p>
 												}
 											/>
@@ -770,9 +810,13 @@ export default function RegistroPublicidad(props) {
 												Mostrar Titulo
 											</Checkbox>
 										</div>
+										<div className="my-4">
+											<h4>{bannerRender.banner.publicado ? 'Banner publicado' : 'Banner no publicado'}</h4>
+										</div>
 									</div>
-									<div className="d-flex justify-content-around">
+									<div className="d-lg-flex d-block justify-content-around">
 										<Button
+											className="m-2"
 											type="primary"
 											size="large"
 											ghost
@@ -780,7 +824,8 @@ export default function RegistroPublicidad(props) {
 										>
 											Cerrar
 										</Button>
-										<Button
+										{/* <Button
+											className="m-2"
 											type="primary"
 											ghost
 											size="large"
@@ -792,15 +837,27 @@ export default function RegistroPublicidad(props) {
 											}
 										>
 											{bannerRender.banner.publicado ? 'Publicado' : 'Publicar'}
-										</Button>
+										</Button> */}
 										<Button
+											className="m-2"
 											htmlType="submit"
 											type="primary"
 											disabled={disabled}
 											size="large"
 											form="MyForm"
 										>
-											Guardar
+											Guardar sin publicar
+										</Button>
+										<Button
+											className="m-2"
+											htmlType="submit"
+											type="primary"
+											disabled={disabled}
+											size="large"
+											form="MyForm"
+											onClick={() => setSaveAndPublish(true)}
+										>
+											Guardar y publicar
 										</Button>
 									</div>
 								</div>

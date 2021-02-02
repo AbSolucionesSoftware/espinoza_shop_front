@@ -9,15 +9,18 @@ function Banner_Triple(props) {
 
     const render = banner.banners.map((banner) => {
         return(
-            <div key={banner._id} className="col-lg-4 mt-4 container-imagenes">
+            <div key={banner._id} className="col-lg-4 container-imagenes">
                 <div className="container-banner-triple">
-                    <Link to={`/searching/${banner.tipo.categoria || banner.tipo.temporada}`}>
                         <img
+                            onClick={() =>
+                                {if (banner.vincular !== false) {
+                                    props.history.push(`/searching/${ banner.tipo.categoria || banner.tipo.temporada || banner.tipo.genero }`);
+                                }
+                            }}
                             className="imagen-triple"
                             src={imagenLocal ? banner.imagenBanner : aws + banner.imagenBanner}
                             alt="Imgen publicitaria"
                         />
-                    </Link>
                 </div>
             </div>
         )
@@ -26,7 +29,7 @@ function Banner_Triple(props) {
 
     return (
         <div>
-            <div className="container mt-5">
+            <div className="container mt-3">
                 <div className="row">
                     {render}
                 </div>

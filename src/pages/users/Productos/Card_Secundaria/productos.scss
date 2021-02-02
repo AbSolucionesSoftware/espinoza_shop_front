@@ -14,9 +14,9 @@
 .titulo-producto{
     width: 100%;
 }
-.titulo-elipsis{
+.titulo-elipsis-sec{
     // padding: 5px;
-    height: 30px;
+    height: 60px;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -34,6 +34,7 @@
 }
 .contenedor-card-producto-secundario{
     // border-right: 1px solid #e0e0e0;
+    // height: 240px;
     cursor: pointer;
     padding-bottom: 0px!important;
 }
@@ -46,13 +47,13 @@
     top: 0;
     left: 0;
 }
-.contenedor-card-producto-secundario:hover .titulo-elipsis{
-    height: 50px;
-    transition-duration: .2s;
-    transition-delay: .3s;
+// .contenedor-card-producto-secundario:hover .titulo-elipsis{
+//     height: 50px;
+//     transition-duration: .2s;
+//     transition-delay: .3s;
     
-    /* transition: ease-out .2s; */
-}
+//     /* transition: ease-out .2s; */
+// }
 .contenedor-imagen-producto-secundario{
     height: 180px; 
     width: 220px;
@@ -64,8 +65,8 @@
     max-width: 100%;
     max-height: 100%;
 }
-.rebajado{
-    font-size: 15px;
+.rebajado-sec{
+    font-size: 13px;
 }
 .contenedor-oferta{
     position: absolute;
@@ -83,15 +84,15 @@
     width: 45px;
 }
 .contenedor-titulos-productos-sec > h1 {
-    font-size: 16px;
+    font-size: 14px;
 }
-.contenedor-precios-productos > h2 {
-    font-size: 15px;
+.contenedor-precios-sec > h2 {
+    font-size: 13px;
 }
-.contenedor-precios-productos > h3 {
-    font-size: 22px;
+.contenedor-precios-sec > h3 {
+    font-size: 23px;
 }
-.contenedor-precios-productos > p {
+.contenedor-precios-sec > p {
     font-size: 15px!important;
 }
 @media(max-width: 768px){
@@ -112,5 +113,3 @@
 .margen > .ant-card-body{
     padding: 0px!important;
 }
-
-

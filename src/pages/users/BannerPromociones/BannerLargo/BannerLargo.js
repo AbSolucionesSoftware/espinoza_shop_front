@@ -22,12 +22,12 @@ const BgElement = Element.BgElement;
     }; */
     
     const render = banner.banners.map((banner, index) => {
-        console.log(banner);
+
         return (
-            <div key={index} className="mt-5 cont-principal">
+            <div key={index} className="mt-3 cont-principal">
                 {banner.mostrarTitulo !== false ? (
                     <TweenOne key="demo" animation={{ y: 30, opacity: 0, type: 'from', delay: 800 }}>
-                        <h1 className="mt-5 tit-banner">{banner.tipo.categoria || banner.tipo.temporada}</h1>
+                        <h1 className="mt-2 tit-banner">{banner.tipo.categoria || banner.tipo.temporada }</h1>
                     </TweenOne>
                  ) : ""}
 
@@ -38,7 +38,7 @@ const BgElement = Element.BgElement;
                           <BgElement
                               onClick={() =>
                                   {if (banner.vincular !== false) {
-                                      props.history.push(`/searching/${ banner.tipo.categoria || banner.tipo.temporada }`);
+                                      props.history.push(`/searching/${ banner.tipo.categoria || banner.tipo.temporada || banner.tipo.genero }`);
                                   }
                               }}
   
@@ -60,14 +60,14 @@ const BgElement = Element.BgElement;
 
                 <div>
                     {banner.mostrarProductos !== false ? (
-                        <div className="mx-auto div-cards">
-                            <CardsProductos className="mx-auto" tipo={banner.tipo} banner={banner} />
-                            <div className="d-flex justify-content-center">
-                                <Link to={`/searching/${banner.tipo.categoria || banner.tipo.temporada}`} style={{ fontSize: 18 }}>
-                                    Ver todos los productos
-                                </Link>
+                            <div className="mx-auto div-cards">
+                                <CardsProductos className="mx-auto" tipo={banner.tipo} />
+                                <div className="d-flex justify-content-center">
+                                    <Link to={`/searching/${banner.tipo.categoria || banner.tipo.temporada || banner.tipo.genero}`} style={{ fontSize: 18 }}>
+                                        Ver todos los productos
+                                    </Link>
+                                </div>
                             </div>
-                        </div>
                     ) : ""}
                 </div>
 
