@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300&display=swap');
 
 $color-blog: #ffff;
 
@@ -107,7 +107,6 @@ p, a, li{
     /* border-top: 2px solid $border-color-active!important;
     border-bottom: none!important; */
 }
-
 .nav-font-color-sesion:hover{
     color: $bg-color-navbar!important;
     border-bottom: 3px solid white!important;
@@ -184,7 +183,7 @@ p, a, li{
 /* CARDS */
 .contenedor-card-body > .ant-card-body{
     padding: 0px!important;
-    // background-color: $bg-color-cards-productos; 
+    background-color: $bg-color-cards-productos; 
     min-height: 90px;
 }
 .mini-contenedor-card-body > .ant-card-body{
@@ -303,7 +302,7 @@ p, a, li{
 }
 
 // G A L E R I A
-.image-gallery-thumbnail.active, .image-gallery-thumbnail:hover, .image-gallery-thumbnail:focus {
+.image-gallery-thumbnail.active, .image-gallery-thumbnail:hover, .image-gallery-thumbnail:focus{
     border: .5px solid $bg-color-navbar;
 }
 
@@ -325,4 +324,41 @@ p, a, li{
 .card-informativa{
     color: $bg-color-font-banner;
 }
+
+
+//VARIABLES DE TITULOS GENERALES PARA TODA LA PAGINA
+
+.font-prin{
+    font-size: 24px;
+}
+.font-secun{
+    font-size: 18px;
+}
+.font-descrip{
+    font-size: 16px;
+}
+.font-peque{
+    font-size: 14px;
+}
+
+.precio-prin{
+    font-size: 30px;
+}
+.font-vista-prod{
+    font-size: 15px;
+}
+.font-foot{
+    font-size: 15px;
+}
+
+.font-carrito{
+    font-size: 24px;
+}
+.font-sec-car{
+    font-size: 18px;
+}
+.font-des-car{
+    font-size: 15px;
+}
+
 

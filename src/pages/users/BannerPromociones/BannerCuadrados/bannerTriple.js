@@ -29,7 +29,7 @@ function Banner_Triple(props) {
 
     return (
         <div>
-            <div className="container mt-3">
+            <div className="container">
                 <div className="row">
                     {render}
                 </div>
