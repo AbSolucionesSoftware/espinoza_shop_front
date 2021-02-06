@@ -1,7 +1,7 @@
 import React from 'react';
 import aws from '../../../../config/aws';
 // import DOMPurify from 'dompurify';
-import { Card, Button } from 'antd';
+import { Card, Tooltip } from 'antd';
 import { Link } from 'react-router-dom';
 import './productos.scss';
 // import { ShoppingCartOutlined } from '@ant-design/icons';
@@ -64,9 +64,7 @@ export default function CardSecundaria(props) {
 								<div className="col-lg-6 contenedor-titulos-productos-sec titulo-elipsis-sec">
 									<h1 className="titulo-producto">{productos.productoPromocion.nombre}</h1>
 								</div>
-								
 							</div>
-							
 						</Card>
 					</Card>
 				</Link>
@@ -74,12 +72,12 @@ export default function CardSecundaria(props) {
 		);
 	} else {
 		return (
-			<div key={productos._id} className="size-col col-lg-2 col-6">
+			<div key={productos._id} className="size-col col-lg-2 col-6 card-div">
 				<Link to={`/vista_producto/${productos._id}`}>
 					<Card
 						hoverable 
 						style={gridStyle} 
-						className="contenedor-card-producto-secundario margen" 
+						className="contenedor-card-producto-secundario margen-b" 
 						bordered={false}
 					>
 						{productos.promocion.length !== 0 ? (
@@ -89,8 +87,6 @@ export default function CardSecundaria(props) {
 										<p className="h4 porcentaje-descuento d-inline">
 											{agregarPorcentaje(promo.precioPromocion, productos.precio)}% OFF
 										</p>
-										{/* <h5 className="shadow">OFERTA</h5> */}
-										{/* <p>-{agregarPorcentaje(promo.precioPromocion, productos.precio)}%</p> */}
 									</div>
 								);
 							})
@@ -111,34 +107,42 @@ export default function CardSecundaria(props) {
 									</div>
 								</div>
 							}
-							className="margen"
+							className="margen-dentro"
 						>
 							
 							{!productos.promocion.length ? (
-								<div className="row ">
-									<div className="col-lg-6">
-										<div className="contenedor-precios-sec">
-											<h3>${formatoMexico(productos.precio)}</h3>
+								<div className="row contenedor-informacion">
+									<div className="col-lg-7  margen-precios-promo">
+										<div className="contenedor-precios-sec infor-center margen-precios">
+											<Tooltip placement="top" title={formatoMexico(productos.precio)}>
+												<h3 className="font-prin " >${formatoMexico(productos.precio)}</h3>
+											</Tooltip>
 										</div>
 									</div>
-									<div className="col-lg-6 contenedor-titulos-productos-sec titulo-elipsis-sec">
-										<h1 className="titulo-producto">{productos.nombre}</h1>
+									<div className="col-lg-5 infor-center contenedor-titulos-productos-sec titulo-elipsis-sec">
+										<Tooltip placement="top" title={productos.nombre}>
+											<p className="font-peque titulo-producto">{productos.nombre}</p>
+										</Tooltip>
 									</div>
 								</div>
 							) : (
 								productos.promocion.map((promo) => {
 									return (
-										<div className="row">
-											<div className="col-lg-6 contenedor-precios-sec" key={promo._id}>
-												<h2 className="h5 precio-producto rebajado-sec mr-2">
+										<div className="row contenedor-informacion">
+											<div className=" col-lg-6 infor-center contenedor-precios-sec margen-precios-promo" key={promo._id}>
+												<h2 className="font-peque precio-producto rebajado-sec mr-2">
 													${formatoMexico(productos.precio)}
 												</h2>
-												<h3 className="h5 card-precio-rebaja d-inline mr-1">
-													${formatoMexico(promo.precioPromocion)}
-												</h3>
+												<Tooltip placement="top" title={formatoMexico(promo.precioPromocion)}>
+													<p className="font-secun precios card-precio-rebaja d-inline mr-1">
+														${formatoMexico(promo.precioPromocion)}
+													</p>
+												</Tooltip>
 											</div>
-											<div className="col-lg-6 contenedor-titulos-productos-sec titulo-elipsis-sec">
-												<h1 className="titulo-producto">{productos.nombre}</h1>
+											<div className="col-lg-6 contenedor-titulos-productos-sec titulo-elipsis-sec ">
+												<Tooltip placement="top" title={productos.nombre}>
+													<p className="font-peque titulo-producto">{productos.nombre}</p>
+												</Tooltip>
 											</div>
 										</div>
 										

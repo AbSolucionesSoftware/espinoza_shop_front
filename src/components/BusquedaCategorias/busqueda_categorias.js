@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect, useContext } from 'react';
 import clienteAxios from '../../config/axios';
 import { notification, Row, Breadcrumb, Button } from 'antd';
-import ComponenteProductos from '../../pages/users/Productos/componente_productos';
+import Card_Producto from '../../pages/users/Productos/Cards_Normales/card_producto'
 import Spin from '../Spin';
 import './busqueda_categorias.scss';
 import { MenuContext } from '../../context/carritoContext';
@@ -16,6 +16,7 @@ function BusquedaCategorias(props) {
 	const [ resultado, setResultado ] = useState([]);
 	const { reloadFilter, setReloadFilter } = useContext(MenuContext);
 	const [ todosProductos, setTodosProductos ] = useState(false);
+
 
 	const obtenerFiltrosDivididos = async (categoria, subcategoria, temporada, genero) => {
 		let cat = categoria;
@@ -35,6 +36,8 @@ function BusquedaCategorias(props) {
 		if(temporada === 'null'){
 			temp = '';
 		}
+
+		
 
 		setLoading(true);
 		await clienteAxios
@@ -93,6 +96,12 @@ function BusquedaCategorias(props) {
 		setTodosProductos(true);
 	}
 
+	useEffect(() => {
+		return () => {
+			limpiarFiltros();
+		}
+	}, [])
+
 	useEffect(
 		() => {
 			obtenerFiltrosDivididos(categoria, subcategoria, temporada, genero);
@@ -100,17 +109,17 @@ function BusquedaCategorias(props) {
 		[ props ]
 	);
 
-	const result = resultado.map((productos) => <ComponenteProductos key={productos._id} productos={productos} />);
+	const result = resultado.map((productos) => <Card_Producto key={productos._id} productos={productos} />);
 
 	return (
 		<Fragment>
 			<Spin spinning={loading}>
 				<div className="my-4 mx-3">
-					<h3 className="d-inline mr-3">{resultado.length} resultados en: </h3>
+					<h3 className="d-inline mr-3 font-prin">{resultado.length} resultados en: </h3>
 					{todosProductos ? (
-						<h3  className="d-inline">Todos los productos</h3>
+						<h3  className="d-inline font-prin">Todos los productos</h3>
 					): (
-						<Breadcrumb separator=">" className="d-inline">
+						<Breadcrumb separator=">" className="d-inline font-prin">
 							<Breadcrumb.Item className="bread-font">{categoria !== 'null' ? categoria : null}</Breadcrumb.Item>
 							<Breadcrumb.Item className="bread-font">{subcategoria !== 'null' ? subcategoria : null}</Breadcrumb.Item>
 							<Breadcrumb.Item className="bread-font">{temporada !== 'null' ? temporada : null}</Breadcrumb.Item>

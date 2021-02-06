@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import clienteAxios from '../../../config/axios';
 import { notification, Result } from 'antd';
 import Spin from '../../../components/Spin';
-
-import '../Productos/productos.scss';
+import '../Productos/Card_Secundaria/productos.scss'
+import '../Productos/Cards_Normales/card_producto.scss';
 import CardSecundaria from '../Productos/Card_Secundaria/card_secundaria';
+import Card_Producto_Frente from '../Productos/Cards_Normales/card_producto_frente';
 import Imagen_Banner from './BannerOrientacion/imagenBanner'
 
 // import Pagination from '../../../components/Pagination/pagination';
@@ -56,18 +57,18 @@ function CardsProductos({tipo, orientacion, banner, imagenLocal}) {
 	const render = productos.map((productos, index) => {
 		if(orientacion > 0){
 			if(orientacion === 1 && index === 0 ){
-				return <Imagen_Banner key={index} imagen={banner.imagenBanner} link={banner.tipo} imagenLocal={imagenLocal} />
+				return <Imagen_Banner key={index} vincular={banner.vincular} imagen={banner.imagenBanner} link={banner.tipo} imagenLocal={imagenLocal} />
 			}else if(orientacion === 2 && index === 2){
-				return <Imagen_Banner key={index} imagen={banner.imagenBanner}	link={banner.tipo} imagenLocal={imagenLocal}/>
+				return <Imagen_Banner key={index} vincular={banner.vincular} imagen={banner.imagenBanner}	link={banner.tipo} imagenLocal={imagenLocal}/>
 			}else if(orientacion === 3 && index === 4){
-				return <Imagen_Banner key={index} imagen={banner.imagenBanner} link={banner.tipo} imagenLocal={imagenLocal}/>
+				return <Imagen_Banner key={index} vincular={banner.vincular} imagen={banner.imagenBanner} link={banner.tipo} imagenLocal={imagenLocal}/>
 			}else if(index <= 4){
 				return <CardSecundaria key={index} productos={productos} imagenLocal={imagenLocal} />
 			}
 		}else{
-			if(index <= 5){
+			if(index <= 4){
 				return (
-					<CardSecundaria key={index} productos={productos} />
+					<Card_Producto_Frente key={index} productos={productos} />
 				)
 			}
 		}
@@ -99,9 +100,9 @@ function CardsProductos({tipo, orientacion, banner, imagenLocal}) {
 	return (
 		<Spin spinning={loading}>
 			{/* <div className="principal-productos"><p>NUESTROS PRODUCTOS</p></div> */}
-			<div className="mt-2 d-flex justify-content-center align-items-center">
-				<div className="justify-content-center align-items-center">
-					<div style={{ maxWidth: '95vw' }} className="row d-flex justify-content-center align-items-center">
+			<div className="d-flex justify-content-center align-items-center cont-div-card">
+				<div className="justify-content-center align-items-center cont-div-card">
+					<div style={{ maxWidth: '95vw', paddingBottom: 0, marginBottom: 0 }} className="row d-flex justify-content-center align-items-center">
 
 						{productos.length ? (
 							render

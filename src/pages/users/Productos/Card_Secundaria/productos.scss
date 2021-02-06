@@ -8,15 +8,24 @@
 //     font-weight: bold;
 //     width: 100%;
 // }
+.cont-div-card{
+    padding-bottom: 0px!important;
+    margin-bottom: 0px!important;
+}
+.card-div-sec{
+    padding-bottom: 0px!important;
+    margin-bottom: 0px!important;
+}
 .banner-producto{
     max-width: 100%;
 }
 .titulo-producto{
-    width: 100%;
+    height: 40px;
+    width: 100%!important;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .titulo-elipsis-sec{
-    // padding: 5px;
-    height: 60px;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -28,13 +37,18 @@
 
 .ant-col{
     width: 300px;
+    margin-bottom: 0px!important;
+
 }
 .size-col{
+    padding-bottom: 0px!important;
+    padding-top: 25px;
     min-width: 190px;
 }
 .contenedor-card-producto-secundario{
     // border-right: 1px solid #e0e0e0;
-    // height: 240px;
+    height: 260px;
+    border-radius: 13px;
     cursor: pointer;
     padding-bottom: 0px!important;
 }
@@ -66,6 +80,7 @@
     max-height: 100%;
 }
 .rebajado-sec{
+    color: green;
     font-size: 13px;
 }
 .contenedor-oferta{
@@ -83,19 +98,33 @@
     color: rgb(238, 155, 0);
     width: 45px;
 }
+
+.contenedor-informacion{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.infor-center{
+    justify-content: center;
+    align-items: center;
+}
+
+
 .contenedor-titulos-productos-sec > h1 {
-    font-size: 14px;
+    // margin-top: 10px;
+    padding-right: 7%;
 }
-.contenedor-precios-sec > h2 {
-    font-size: 13px;
-}
-.contenedor-precios-sec > h3 {
-    font-size: 23px;
-}
-.contenedor-precios-sec > p {
-    font-size: 15px!important;
+
+.contenedor-precios-sec{
+    // padding: 9%;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 @media(max-width: 768px){
+    .contenedor-precios-sec{
+        width: 135px;
+    }
     .contenedor-imagen-producto-principal{
         height: 20px; 
         width: 100px;
@@ -106,10 +135,58 @@
     .size-col{
         min-width: 10px;
     }
+    .titulo-producto{
+        height: 19px;
+        padding-left: 9%!important;
+        width: 100%!important;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .contenedor-informacion{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 0px!important;
+    }
+    .infor-center{
+        justify-content: center;
+        align-items: center;
+    }
+    .contenedor-card-producto-secundario{
+        height: 275px;
+        border-radius: 13px;
+        cursor: pointer;
+        padding-bottom: 0px!important;
+    }
 }
 .card-precio-rebaja{
-    color:red;
+    color: #33FF35;
 }
-.margen > .ant-card-body{
-    padding: 0px!important;
+.margen-dentro > .ant-card-body{
+    padding-left: 2%!important;
+    padding-right: 0px!important;
+    padding-top: 0px!important;
+    padding-bottom: 0px!important;
 }
+.margen-precios{
+    padding-left: 6%!important;
+    padding-right: 0px!important;
+    padding-bottom: 0px!important;
+
+}
+.margen-precios-promo{
+    padding-left: 2%!important;
+    padding-right: 0px!important;
+    padding-top: 0px!important;
+    padding-bottom: 0px!important;
+}
+.margen-b{
+    margin-bottom: 0px!important;
+}
+.margen-b > .ant-card-body{
+    padding-bottom: 0px!important;
+    padding-left: 0px!important;
+    padding-right: 0px!important;
+}
+
