@@ -33,12 +33,7 @@ export default function ErrorPago(props) {
 							<Button type="primary" className="color-boton">
 								Ir a pagina principal
 							</Button>
-						</Link>,
-                        <Link key="reintentar" to={`/confirmacion_compra/${pedidoID}`}>
-                            <Button type="primary" ghost className="mb-3 color-boton-sec">
-                                Reintentar
-                            </Button>
-                        </Link>
+						</Link>
 					]}
 				/>
 			</div>
